@@ -3,9 +3,16 @@
 
 ## Includes
 	
-	* Fancybox
-	* Some Editor schortcodes
+	* Fancybox ( To use uncomment in function.php )
+	* TINYMCE Button schortcodes/functions
+	* Use of parent Page Template on childs
 
+
+## WP Security best practices ( Can enable from function.php )
+	* REST API is Disabled 
+	* RSS Feed links removed from head 
+	* File Editor is Disabled
+	* WP Version is removed from scripts and styles
 
 ## Use
   

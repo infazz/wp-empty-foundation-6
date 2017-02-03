@@ -3,9 +3,58 @@
 	// BlueGlass Interactive
 	//
 	
-
+	$theme_version		= '1.0';
 	$functions_path 	= TEMPLATEPATH . '/functions/';	
 	$template_url 		= get_bloginfo('template_url');
+
+
+	// Security best practices
+	include_once($functions_path . '/security.php');
+
+	// Theme ajax functions
+	include_once($functions_path . '/ajax.php');
+	
+	// Theme sidebars
+	include_once($functions_path . '/sidebars.php');
+
+	// Helper functions
+	include_once($functions_path . '/helpers.php');
+
+	//Post types
+	//include_once($functions_path . 'post_types.php');
+
+	//Category meta
+	//include_once($functions_path . 'category_meta.php');
+
+	//Shortcodes
+	require_once $functions_path . 'theme_shortcodes/shortcodes.php';
+	//include_once($functions_path . 'theme_shortcodes/alert.php');
+	include_once($functions_path . 'theme_shortcodes/tabs.php');
+	include_once($functions_path . 'theme_shortcodes/toggle.php');
+	//include_once($functions_path . 'theme_shortcodes/html.php');
+
+	if( is_admin() ){
+		// Taxonomy custom fields
+		//include_once($functions_path . 'category-meta.php');
+
+		//tinyMCE includes
+		include_once($functions_path . 'theme_shortcodes/tinymce_shortcodes.php');
+		include_once($functions_path . '/add_thumbs_to_admin.php');
+	}
+
+
+	//
+	// Security Best Practices ( Comment function to disable )
+	// 
+	blueglass_security_disable_xmlrpc();
+ 	blueglass_security_disable_rest_api();
+ 	blueglass_security_remove_rss_links();
+ 	blueglass_security_dissalow_file_edit();
+ 	blueglass_security_remove_wp_version_string();
+ 	//
+
+
+
 
 	// Get language code from WPML if one of plugin is enabled
 	if( function_exists('icl_get_languages')){
@@ -30,46 +79,6 @@
 
 
 
-	// Add RSS links to <head> section
-	add_theme_support( 'automatic-feed-links' );
-
-
-	// Security best practices
-	include_once($functions_path . '/security.php');
-
-	// Theme ajax functions
-	include_once($functions_path . '/ajax.php');
-	
-	// Theme sidebars
-	include_once($functions_path . '/sidebars.php');
-
-	//Post types
-	//include_once($functions_path . 'post_types.php');
-
-
-	//Category meta
-	//include_once($functions_path . 'category_meta.php');
-
-	
-	//Shortcodes
-	require_once $functions_path . 'theme_shortcodes/shortcodes.php';
-	//include_once($functions_path . 'theme_shortcodes/alert.php');
-	include_once($functions_path . 'theme_shortcodes/tabs.php');
-	include_once($functions_path . 'theme_shortcodes/toggle.php');
-	//include_once($functions_path . 'theme_shortcodes/html.php');
-
-	if( is_admin() ){
-		// Taxonomy custom fields
-		//include_once($functions_path . 'category-meta.php');
-
-		//tinyMCE includes
-		include_once($functions_path . 'theme_shortcodes/tinymce_shortcodes.php');
-		include_once($functions_path . '/add_thumbs_to_admin.php');
-	}
-
-
-
- 
 
     add_action('admin_init', 'blueglass_admin_JS_init_method');
 	function blueglass_admin_JS_init_method() {
@@ -81,20 +90,22 @@
 
 
 
-	//add_action( 'get_header', 'mighty_enqueue_head_scripts' );
+	
 	if ( !function_exists( 'mighty_enqueue_head_scripts' ) ) {
-		function mighty_enqueue_head_scripts() {
-			global $template_url;
+		add_action( 'get_header', 'blueglass_enqueue_head_scripts' );
+		function blueglass_enqueue_head_scripts() {
+			global $template_url, $theme_version;
 
-			//wp_enqueue_style( 'fancybox', $template_url ."/css/jquery.fancybox.css", FALSE, '1.0' ); 
-			//wp_enqueue_style( 'slick', $template_url ."/css/idangerous.swiper.css", FALSE, '1.0' ); 
+			wp_enqueue_style( 'fancybox', $template_url ."/css/app.css", FALSE, $theme_version ); 
+			//wp_enqueue_style( 'fancybox', $template_url ."/css/jquery.fancybox.css", FALSE, $theme_version ); 
+			//wp_enqueue_style( 'slick', $template_url ."/css/idangerous.swiper.css", FALSE, $theme_version ); 
 		}
 	}
 	
 	
 	add_action('get_footer', 'blueglass_JS_init_method');
 	function blueglass_JS_init_method() {
-		global $template_url;
+		global $template_url, $theme_version;
 
 		// Load jQuery
 		if ( !is_admin() ) {
@@ -113,7 +124,7 @@
 
 			wp_enqueue_script( 'theme-javascript', $template_url.'/js/app.js', 'theme-scripts' );
 			wp_localize_script('theme-javascript', 'scripts_localized', $localized_scripts );
-			
+
 		}
 	}
 

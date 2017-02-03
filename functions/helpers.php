@@ -4,6 +4,9 @@
 	*/
 
 
+	// Add RSS links to <head> section
+	// add_theme_support( 'automatic-feed-links' );
+
 	// Removes from admin bar
 	function mytheme_admin_bar_render() {
 		global $wp_admin_bar;
@@ -49,7 +52,7 @@
 	function make_blog_email_from_host( $email_address = null ){
 		return 'noreply@' . $_SERVER['SERVER_NAME'];
 	}
-	add_filter('wp_mail_from_name', 'make_blog_name_from_name');
+	//add_filter('wp_mail_from_name', 'make_blog_name_from_name');
 	//add_filter( 'wp_mail_from', 'make_blog_email_from_host' );
 	
 	
