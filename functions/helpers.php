@@ -46,10 +46,10 @@
 	
 	
 
-	function make_blog_name_from_name($name = '') {
+	function make_blog_name_from_name() {
 		return get_bloginfo('name');
 	}
-	function make_blog_email_from_host( $email_address = null ){
+	function make_blog_email_from_host(){
 		return 'noreply@' . $_SERVER['SERVER_NAME'];
 	}
 	//add_filter('wp_mail_from_name', 'make_blog_name_from_name');
@@ -73,21 +73,17 @@
 			$ancestors = $post->ancestors;
 
 			if ($ancestors) {
-				$current_page_template = get_post_meta($post->ID,'_wp_page_template',true);
-				$parent_page_template = get_post_meta(end($ancestors),'_wp_page_template',true);
-				$template = TEMPLATEPATH . "/{$parent_page_template}";
+				$current_template = get_post_meta($post->ID,'_wp_page_template',true);
+				$parent_template = get_post_meta(end($ancestors),'_wp_page_template',true);
+				$template = TEMPLATEPATH . "/{$parent_template}";
 				
 				//print_r($current_page_template);
 				if (file_exists($template)) {
-					if( $current_page_template == 'default' ){
+					if( $current_template == 'default' ){
 						load_template($template);
 						exit;
-					} else {
-						return true;
 					}
 				}
-			} else {
-				return true;
 			}
 		
 		}
@@ -145,64 +141,39 @@
 	}
 	
 	
-	function RE_pagination($pages = '', $range = 999)
-	{ 
-	
-		global $paged; if(empty($paged)) $paged = 1;
-		if($pages == ''){
-			global $wp_query;
-			$pages = $wp_query->max_num_pages;
-			if(!$pages){ $pages = 1; }
-		}
-		if(1 != $pages){
-			echo "<div class='pagination'>";
-				if($paged > 1 && $showitems < $pages) echo "<a  href='".get_pagenum_link($paged - 1)."' class='page-numbers'>&lsaquo;</a>";
-				
-				for ($i=1; $i <= $pages; $i++){
-					
-					if (1 != $pages &&( !($i >= $paged+$range+1 || $i <= $paged-$range-1) || $pages <= $showitems )){
-					echo ($paged == $i)? "<span class='page-numbers'><span class='current'>".$i."</span></span>":"<a  href='".get_pagenum_link($i)."' class='page-numbers'>".$i."</a>";
-					}
-				}
-				if ($paged < $pages && $showitems < $pages) echo "<a  href='".get_pagenum_link($paged + 1)."' class='page-numbers'>&rsaquo;</a>";
-		   
-			echo "</div>";
-		}
-	 }
-	//add_filter('get_pagenum_link', 'qtranslate_next_previous_fix');
-
-
 	function wp_corenavi() {
 	  	global $wp_query;
 	  	$pages = '';
 	  	$max = $wp_query->max_num_pages;
 	  	if (!$current = get_query_var('paged')) $current = 1;
-	  	$a['base'] = str_replace(999999999, '%#%', get_pagenum_link(999999999));
-	  	$a['total'] = $max;
-	  	$a['current'] = $current;
+	  	$arr = array();
+	  	$arr['base'] = str_replace(999999999, '%#%', get_pagenum_link(999999999));
+	  	$arr['total'] = $max;
+	  	$arr['current'] = $current;
 
 	  	$total = 1; 
-	  	$a['mid_size'] = 3; 
-	  	$a['end_size'] = 1;
-	  	$a['prev_text'] = '&laquo;'; 
-	  	$a['next_text'] = '&raquo;'; 
+	  	$arr['mid_size'] = 3; 
+	  	$arr['end_size'] = 1;
+	  	$arr['prev_text'] = '&laquo;'; 
+	  	$arr['next_text'] = '&raquo;'; 
 
 	  	if ($max > 1) echo '<div class="navigation column medium-12">';
 	  	if ($total == 1 && $max > 1) $pages = '<span class="pages">' . __('Page', 'blueglass') . $current . ' ' . __('of', 'blueglass') . ' ' . $max . '</span>'."\r\n";
-	  	echo $pages . paginate_links($a);
+	  	echo $pages . paginate_links($arr);
 	 	if ($max > 1) echo '</div>';
 	}
 
 	
 
-	//add_filter( 'gettext', 'theme_change_fields', 20, 3 );
-	function theme_change_fields( $translated_text, $text, $domain ) {
-		$lang = qtrans_getLanguage();
+	//add_filter( 'gettext', 'theme_change_fields', 20, 1 );
+	// ( $translated_text, $text, $domain )
+	function theme_change_fields( $translated_text ) {
+
 		switch ( $translated_text ) {
 	
 			case 'Some text' :
 	
-				$translated_text = __( 'First Name ', 'theme_text_domain' ) . $lang;
+				$translated_text = __( 'First Name ', 'theme_text_domain' );
 				break;
 	
 			case 'Email' :

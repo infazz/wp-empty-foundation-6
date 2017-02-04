@@ -4,8 +4,7 @@
  */
 
 //alert
-function shortcode_alert($args, $content) {
-    extract($atts);
+function shortcode_alert(null, $content) {
 
 	return '<div class="alert-box error-box">'.do_shortcode($content).'</div>';
 }
@@ -13,8 +12,7 @@ function shortcode_alert($args, $content) {
 add_shortcode('alert', 'shortcode_alert');
 
 //approved
-function shortcode_approved($args, $content) {
-	extract($atts);
+function shortcode_approved(null, $content) {
 
 	return '<div class="alert-box approved-box">'.do_shortcode($content).'</div>';
 }

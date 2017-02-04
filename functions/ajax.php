@@ -19,7 +19,8 @@
 		}else{
 			echo 'not ok';
 		}
-		die();
+		
+		wp_die();
 	}
 
 ?>
