@@ -1,5 +1,7 @@
 # WordPress Foundation 6 Starter Template
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/93fb3da66eda459a8109265036bb560a)](https://www.codacy.com/app/infazz/wp-empty-foundation-6?utm_source=github.com&utm_medium=referral&utm_content=infazz/wp-empty-foundation-6&utm_campaign=badger)
+
 
 ## Includes
 	
