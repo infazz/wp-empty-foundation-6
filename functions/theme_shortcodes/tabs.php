@@ -5,6 +5,7 @@
  */
 
 function tabs_shortcode($atts, $content = null) {
+    extract($atts);
 
     $output = '<div class="tabs">';
     $output .= '<div class="tab-menu">';

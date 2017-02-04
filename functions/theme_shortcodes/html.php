@@ -8,7 +8,7 @@
 // Frames
 
 function frame_shortcode($atts, $content = null) {
-
+    extract($atts);
     $output = '<div class="frame clearfix">';
     $output .= do_shortcode($content);
     $output .= '</div><!-- .frame (end) -->';
@@ -20,7 +20,7 @@ function frame_shortcode($atts, $content = null) {
 add_shortcode('frame', 'frame_shortcode');
 
 function frame_left_shortcode($atts, $content = null) {
-
+    extract($atts);
     $output = '<div class="frame alignleft">';
     $output .= do_shortcode($content);
     $output .= '</div><!-- .frame (end) -->';
@@ -32,7 +32,7 @@ function frame_left_shortcode($atts, $content = null) {
 add_shortcode('frame_left', 'frame_left_shortcode');
 
 function frame_right_shortcode($atts, $content = null) {
-
+    extract($atts);
     $output = '<div class="frame alignright">';
     $output .= do_shortcode($content);
     $output .= '</div><!-- .frame (end) -->';
@@ -93,7 +93,8 @@ add_shortcode('map', 'map_shortcode');
 // Year
 
 function year_shortcode($atts, $content = null) {
-
+    extract($atts);
+    
     $output = '<span class="year">';
     $output .= do_shortcode($content);
     $output .= '</span><!-- .year (end) -->';
@@ -108,7 +109,8 @@ add_shortcode('year', 'year_shortcode');
 // Extra-wrap
 
 function extrawrap_shortcode($atts, $content = null) {
-
+    extract($atts);
+    
     $output = '<p class="extra-wrap">';
     $output .= do_shortcode($content);
     $output .= '</p><!-- .extrawrap (end) -->';
@@ -123,7 +125,8 @@ add_shortcode('extrawrap', 'extrawrap_shortcode');
 // Horizontal Rule
 
 function hr_shortcode($atts, $content = null) {
-
+    extract($atts);
+    
     $output = '<div class="hr"><!-- --></div>';
 
     return $output;
@@ -136,7 +139,8 @@ add_shortcode('hr', 'hr_shortcode');
 // Small Horizontal Rule
 
 function sm_hr_shortcode($atts, $content = null) {
-
+    extract($atts);
+    
     $output = '<div class="sm_hr"></div>';
 
     return $output;
@@ -149,7 +153,8 @@ add_shortcode('sm_hr', 'sm_hr_shortcode');
 // Spacer
 
 function spacer_shortcode($atts, $content = null) {
-
+    extract($atts);
+    
     $output = '<div class="spacer"><!-- --></div>';
 
     return $output;
@@ -162,7 +167,8 @@ add_shortcode('spacer', 'spacer_shortcode');
 // Blockquote
 
 function blockquote_shortcode($atts, $content = null) {
-
+    extract($atts);
+    
     $output = '<blockquote>';
     $output .= do_shortcode($content);
     $output .= '</blockquote><!-- blockquote (end) -->';
