@@ -120,12 +120,12 @@
 			
 			// Foundation Core
 			wp_enqueue_script('theme-foundation', $template_url.'/bower_components/foundation-sites/dist/js/foundation.min.js', 'jquery');
-			//wp_enqueue_script('theme-mousewheel', $template_url.'/js-min/jquery.mousewheel-3.0.6.pack.js', 'jquery');
-			//wp_enqueue_script('theme-fancybox', $template_url.'/js-min/jquery.fancybox.js', 'jquery');
-			//wp_enqueue_script('theme-fancybox-media', $template_url.'/js-min/jquery.fancybox-media.js', 'jquery');
+			//wp_enqueue_script('theme-mousewheel', $template_url.'/js/jquery.mousewheel-3.0.6.pack.js', 'jquery');
+			//wp_enqueue_script('theme-fancybox', $template_url.'/js/jquery.fancybox.js', 'jquery');
+			//wp_enqueue_script('theme-fancybox-media', $template_url.'/js/jquery.fancybox-media.js', 'jquery');
 
 
-			wp_enqueue_script( 'theme-javascript', $template_url.'/js-min/app.js', 'theme-scripts' );
+			wp_enqueue_script( 'theme-javascript', $template_url.'/js/app.js', 'theme-scripts' );
 			wp_localize_script('theme-javascript', 'scripts_localized', $localized_scripts );
 
 		}
