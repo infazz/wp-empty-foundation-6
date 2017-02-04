@@ -46,7 +46,7 @@ add_shortcode('frame_right', 'frame_right_shortcode');
 
 // Button
 
-function button_shortcode($atts, $content = null) {
+function button_shortcode($atts) {
 
 	extract(shortcode_atts(
         array(
@@ -68,7 +68,7 @@ add_shortcode('button', 'button_shortcode');
 
 // Map
 
-function map_shortcode($atts, $content = null) {
+function map_shortcode($atts) {
 
 	extract(shortcode_atts(
         array(
@@ -94,7 +94,7 @@ add_shortcode('map', 'map_shortcode');
 
 function year_shortcode($atts, $content = null) {
     extract($atts);
-    
+
     $output = '<span class="year">';
     $output .= do_shortcode($content);
     $output .= '</span><!-- .year (end) -->';
@@ -124,8 +124,7 @@ add_shortcode('extrawrap', 'extrawrap_shortcode');
 
 // Horizontal Rule
 
-function hr_shortcode($atts, $content = null) {
-    extract($atts);
+function hr_shortcode() {
     
     $output = '<div class="hr"><!-- --></div>';
 
@@ -138,9 +137,8 @@ add_shortcode('hr', 'hr_shortcode');
 
 // Small Horizontal Rule
 
-function sm_hr_shortcode($atts, $content = null) {
-    extract($atts);
-    
+function sm_hr_shortcode() {
+
     $output = '<div class="sm_hr"></div>';
 
     return $output;
@@ -152,8 +150,7 @@ add_shortcode('sm_hr', 'sm_hr_shortcode');
 
 // Spacer
 
-function spacer_shortcode($atts, $content = null) {
-    extract($atts);
+function spacer_shortcode() {
     
     $output = '<div class="spacer"><!-- --></div>';
 

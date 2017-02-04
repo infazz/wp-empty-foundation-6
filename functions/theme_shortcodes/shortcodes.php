@@ -83,7 +83,7 @@ function do_grid($atts, $content = null){
 add_shortcode('grid', 'do_grid');
 
 
-function do_name($atts, $content = null){
+function do_name($atts){
 	extract(shortcode_atts(
         array(
             'title' => 'Илья Семёнов',
@@ -120,7 +120,7 @@ add_shortcode('hide_on_mobile', 'do_hide_on_mobile');
 
 
 
-function do_button($atts, $content = null){
+function do_button($atts){
 	extract(shortcode_atts(
         array(
             'title' => 'Кнопка',
@@ -143,7 +143,7 @@ add_shortcode('button', 'do_button');
  *
  */
 
-function dropcap_shortcode($atts, $content = null) {
+function dropcap_shortcode($atts) {
 
     extract(shortcode_atts(
         array(
@@ -177,8 +177,7 @@ add_shortcode('dropcap', 'dropcap_shortcode');
 	
 //Tag Cloud
 
-function shortcode_tags($atts, $content = null) {
-    extract($atts);
+function shortcode_tags() {
 
 	$output = '<div class="tags-cloud clearfix">';
 
