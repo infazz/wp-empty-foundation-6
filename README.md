@@ -23,17 +23,24 @@ npm install
 bower install
 ```
 
+We also have to include gulp-uglify and pump to minify the js files on the go. 
+Keep in midn that minifier is disabled by default. Go to gulpfile.js and change "production" to "true"
+
+```bash
+npm install --save-dev gulp-uglify
+npm install --save-dev pump
+```
+
 Finally, run 
 ```bash
 npm start
 ```
-to run the Sass compiler. It will re-run every time you save a Sass file.
+to run the Sass and Js compiler. It will re-run every time you save a Sass or JS file.
 
 
 ## Upgrading
 
 If you'd like to upgrade to a newer version of Foundation down the road just run:
-
 
 ```bash
 bower update

@@ -102,10 +102,13 @@
 		}
 	}
 	
-	
+	/*
+		Remember to switch "production" parameter to "true" in gulpfile.js before going live. 
+		This will minify all js files in "src/js" folder
+	*/
 	add_action('get_footer', 'blueglass_JS_init_method');
 	function blueglass_JS_init_method() {
-		global $template_url, $theme_version;
+		global $template_url;
 
 		// Load jQuery
 		if ( !is_admin() ) {
@@ -117,12 +120,12 @@
 			
 			// Foundation Core
 			wp_enqueue_script('theme-foundation', $template_url.'/bower_components/foundation-sites/dist/js/foundation.min.js', 'jquery');
-			//wp_enqueue_script('theme-mousewheel', $template_url.'/js/jquery.mousewheel-3.0.6.pack.js', 'jquery');
-			//wp_enqueue_script('theme-fancybox', $template_url.'/js/jquery.fancybox.js', 'jquery');
-			//wp_enqueue_script('theme-fancybox-media', $template_url.'/js/jquery.fancybox-media.js', 'jquery');
+			//wp_enqueue_script('theme-mousewheel', $template_url.'/js-min/jquery.mousewheel-3.0.6.pack.js', 'jquery');
+			//wp_enqueue_script('theme-fancybox', $template_url.'/js-min/jquery.fancybox.js', 'jquery');
+			//wp_enqueue_script('theme-fancybox-media', $template_url.'/js-min/jquery.fancybox-media.js', 'jquery');
 
 
-			wp_enqueue_script( 'theme-javascript', $template_url.'/js/app.js', 'theme-scripts' );
+			wp_enqueue_script( 'theme-javascript', $template_url.'/js-min/app.js', 'theme-scripts' );
 			wp_localize_script('theme-javascript', 'scripts_localized', $localized_scripts );
 
 		}

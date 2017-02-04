@@ -317,9 +317,9 @@ class Tax_Meta_Class {
   * @access public
   */
   public function wp_ajax_delete_image() {
-    $term_id = isset( $_GET['post_id'] ) ? intval( $_GET['post_id'] ) : 0;
-    $field_id = isset( $_GET['field_id'] ) ? $_GET['field_id'] : 0;
-    $attachment_id = isset( $_GET['attachment_id'] ) ? intval( $_GET['attachment_id'] ) : 0;
+    $term_id = isset( $_GET['post_id'] ) ? intval( strip_tags($_GET['post_id']) ) : 0;
+    $field_id = isset( $_GET['field_id'] ) ? strip_tags($_GET['field_id']) : 0;
+    $attachment_id = isset( $_GET['attachment_id'] ) ? intval( strip_tags($_GET['attachment_id']) ) : 0;
     $ok = false;
     $remove_meta_only = apply_filters("tax_meta_class_delete_image",true);
     if (strpos($field_id, '[') === false){
@@ -501,15 +501,18 @@ class Tax_Meta_Class {
     wp_nonce_field( basename(__FILE__), 'tax_meta_class_nonce' );
     
     foreach ( $this->_fields as $field ) {
-    $multiple = isset($field['multiple'])? $field['multiple'] : false;
+      $multiple = isset($field['multiple'])? $field['multiple'] : false;
+
       $meta = $this->get_tax_meta( $term_id, $field['id'], !$multiple );
-    $meta = ( $meta !== '' ) ? $meta : (isset($field['std'])? $field['std'] : '');
-      if ('image' != $field['type'] && $field['type'] != 'repeater')
+      $meta = ( $meta !== '' ) ? $meta : (isset($field['std'])? $field['std'] : '');
+
+      $not_allowed = array('image', 'repeater');
+      if( !in_array($field['type'], $not_allowed) )
         $meta = is_array( $meta ) ? array_map( 'esc_attr', $meta ) : esc_attr( $meta );
       
       echo '<tr class="form-field">';
-      // Call Separated methods for displaying each type of field.
-      call_user_func ( array( $this, 'show_field_' . $field['type'] ), $field, is_array($meta)? $meta : stripslashes($meta) );
+        // Call Separated methods for displaying each type of field.
+        call_user_func ( array( $this, 'show_field_' . $field['type'] ), $field, is_array($meta)? $meta : stripslashes($meta) );
       echo '</tr>';
     }
     echo '</table>';
