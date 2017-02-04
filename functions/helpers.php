@@ -81,7 +81,6 @@
 				if (file_exists($template)) {
 					if( $current_template == 'default' ){
 						load_template($template);
-						exit;
 					}
 				}
 			}
@@ -115,10 +114,9 @@
 	#
 	function get_that_image_url( $postid, $imagesize = 'large'){
 		$img = wp_get_attachment_image_src( get_post_thumbnail_id( $postid ), $imagesize, false, '' );
-		if( $img[0] == '' ){
+		$img = $img[0];
+		if( $img == '' ){
 			$img = catch_that_image();
-		}else{
-			$img = $img[0];
 		}
 		return $img;
 	}

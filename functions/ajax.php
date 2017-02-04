@@ -18,16 +18,17 @@
 		$input_post = filter_input_array(INPUT_POST);
 		unset( $input_post['action'] );
 
+		$response = 'not ok';
 
 		if( isset($input_post['step-1']) and isset($input_post['step-6']) ){
 
 			$var = filter_input(INPUT_POST, 'var_name');
 			
-			echo 'ok';
-		}else{
-			echo 'not ok';
+			$response = 'ok';
 		}
 
+		/////
+		echo $response;
 		wp_die();
 	}
 
