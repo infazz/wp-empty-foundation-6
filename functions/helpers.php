@@ -50,7 +50,7 @@
 		return get_bloginfo('name');
 	}
 	function make_blog_email_from_host(){
-		return 'noreply@' . $_SERVER['SERVER_NAME'];
+		return 'noreply@' . filter_input(INPUT_SERVER, 'SERVER_NAME', FILTER_SANITIZE_STRING);
 	}
 	//add_filter('wp_mail_from_name', 'make_blog_name_from_name');
 	//add_filter( 'wp_mail_from', 'make_blog_email_from_host' );
@@ -97,18 +97,16 @@
 		if ( mb_strlen($mytitle) >$length ){
 			$mytitle = mb_substr( $mytitle,0,$length);
 			return $mytitle . '...';
-		}else{
-			return $mytitle;
 		}
+		return $mytitle;
 	}
 	
 	function wpwr_extrimmer($mytitle, $length){	
 		if ( mb_strlen($mytitle) >$length ){
 			$mytitle = mb_substr( $mytitle,0,$length);
 			return $mytitle . '... <img src="'. get_bloginfo('template_directory') .'/i/arrow2.png" alt=""/>';
-		}else{
-			return $mytitle;
 		}
+		return $mytitle;
 	} 
 	
 	
@@ -127,17 +125,17 @@
 	
 	
 	function catch_that_image() {
-	  global $post, $posts;
-	  $first_img = '';
-	  ob_start();
-	  ob_end_clean();
-	  $output = preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $post->post_content, $matches);
-	  $first_img = $matches [1] [0];
+	  	global $post, $posts;
+	  	$first_img = '';
+	  	ob_start();
+	  	ob_end_clean();
+	  	$output = preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $post->post_content, $matches);
+	  	$first_img = $matches [1] [0];
 
-	  if(empty($first_img)){ //Defines a default image
-		$first_img = get_bloginfo('tmplate_url') . "/i/default.jpg";
-	  }
-	  return $first_img;
+	  	if(empty($first_img)){ //Defines a default image
+			$first_img = get_bloginfo('tmplate_url') . "/i/default.jpg";
+	  	}
+	  	return $first_img;
 	}
 	
 	

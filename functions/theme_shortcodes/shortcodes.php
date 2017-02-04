@@ -40,6 +40,7 @@ add_shortcode('clearfix', 'do_clearfix');
 
 
 function do_row($atts, $content = null){
+    extract($atts);
 
     $output = '<div class="row">';
 	   	$output .= do_shortcode($content);

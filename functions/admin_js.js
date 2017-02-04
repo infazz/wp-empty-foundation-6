@@ -16,7 +16,7 @@
 	
 	jQuery(".tabs").each(function(){
 		
-		jQuery(this).find(".tab-menu a").on('click', function() {
+		jQuery(this).find(".tab-menu a").on("click", function() {
 			
 			jQuery(this).parent().parent().find("a").removeClass("active");
 			jQuery(this).addClass("active");
@@ -35,14 +35,16 @@
 	// ---------------------------------------------------------
 	
 	
-    var allPanels = $('.box');
-    var allPanels2 = $('.trigger');
+    var allPanels = $(".box");
+    var allPanels2 = $(".trigger");
 	
-	$('.trigger').live('click', function() {
+	$(".trigger").live("click", function() {
 		allPanels.slideUp();
-		allPanels2.removeClass('active');
+		allPanels2.removeClass("active");
 		
-		if($(this).next().css('display') != 'block') $(this).addClass('active').next().slideDown();
+		if($(this).next().css("display") !== "block"){
+			$(this).addClass("active").next().slideDown();
+		}
 		
 		return false;
 	});
