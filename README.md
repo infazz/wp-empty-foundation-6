@@ -31,6 +31,9 @@ npm install --save-dev gulp-uglify
 npm install --save-dev pump
 ```
 
+BTW, any package can be included to the project, for example to optimize images or any other usefull for your project from https://www.npmjs.com/
+
+
 Finally, run 
 ```bash
 npm start
