@@ -114,8 +114,8 @@
         // Remove All Yoast HTML Comments
         // https://gist.github.com/paulcollett/4c81c4f6eb85334ba076
         if (defined('WPSEO_VERSION')){
-          add_action('get_header',function (){ ob_start(function ($o){
-          return preg_replace('/\n?<.*?yoast.*?>/mi','',$o); }); });
+          add_action('get_header',function (){ ob_start(function ($comment){
+          return preg_replace('/\n?<.*?yoast.*?>/mi','',$comment); }); });
           add_action('wp_head',function (){ ob_end_flush(); }, 999);
         }
 	}
