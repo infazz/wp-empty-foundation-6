@@ -105,5 +105,18 @@
 		add_filter('the_generator', 'bgsecure_remove_version');
 		add_filter( 'script_loader_src', 'bgsecure_remove_wp_version_strings' );
 		add_filter( 'style_loader_src', 'bgsecure_remove_wp_version_strings' );
+
+		
+		//wpml
+		global $sitepress;
+		remove_action( 'wp_head', array( $sitepress, 'meta_generator_tag', 20 ) );
+        
+        // Remove All Yoast HTML Comments
+        // https://gist.github.com/paulcollett/4c81c4f6eb85334ba076
+        if (defined('WPSEO_VERSION')){
+          add_action('get_header',function (){ ob_start(function ($o){
+          return preg_replace('/\n?<.*?yoast.*?>/mi','',$o); }); });
+          add_action('wp_head',function (){ ob_end_flush(); }, 999);
+        }
 	}
 ?>
